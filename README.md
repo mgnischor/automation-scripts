@@ -27,7 +27,40 @@ This repository contains production-ready automation scripts designed to streaml
 automation-scripts/
 ├── src/
 │   ├── linux/           # Bash scripts for Linux systems
-│   └── windows/         # PowerShell scripts for Windows systems (coming soon)
+│   │   ├── get_distro_information.sh
+│   │   ├── get_hostname.sh
+│   │   ├── get_network_info.sh
+│   │   ├── get_system_resources.sh
+│   │   ├── get_top_processes.sh
+│   │   ├── debian_hardening.sh
+│   │   ├── red_hat_hardening.sh
+│   │   ├── backup_system.sh
+│   │   ├── cleanup_system.sh
+│   │   ├── configure_firewall.sh
+│   │   ├── database_backup.sh
+│   │   ├── generate_ssl_certificate.sh
+│   │   ├── manage_users.sh
+│   │   ├── monitor_disk_space.sh
+│   │   ├── monitor_security_logs.sh
+│   │   ├── monitor_services.sh
+│   │   ├── mysql_maintenance.sh
+│   │   ├── postgresql_maintenance.sh
+│   │   ├── setup_docker.sh
+│   │   ├── setup_lamp_stack.sh
+│   │   └── system_health_check.sh
+│   └── windows/         # PowerShell scripts for Windows systems
+│       ├── Get-SystemInformation.ps1
+│       ├── Get-SystemResources.ps1
+│       ├── Get-NetworkDiagnostics.ps1
+│       ├── Test-SystemHealth.ps1
+│       ├── Set-WindowsHardening.ps1
+│       ├── Set-FirewallRules.ps1
+│       ├── Backup-System.ps1
+│       ├── Backup-Database.ps1
+│       ├── Optimize-System.ps1
+│       ├── Manage-LocalUsers.ps1
+│       ├── Watch-ServiceMonitor.ps1
+│       └── Watch-SecurityLogs.ps1
 ├── workspace/
 │   └── automation-scripts.code-workspace
 └── README.md
@@ -108,7 +141,69 @@ automation-scripts/
 
 ## 🪟 Windows Scripts
 
-_Coming soon: PowerShell scripts for Windows system administration_
+### System Information & Monitoring
+
+| Script                       | Description                                                   |
+| ---------------------------- | ------------------------------------------------------------- |
+| `Get-SystemInformation.ps1`  | Retrieves comprehensive Windows system information            |
+| `Get-SystemResources.ps1`    | Monitors CPU, memory, disk, and network usage with thresholds |
+| `Test-SystemHealth.ps1`      | Comprehensive system health check with detailed reporting     |
+| `Watch-ServiceMonitor.ps1`   | Monitors critical services and auto-restarts if stopped       |
+| `Watch-SecurityLogs.ps1`     | Monitors security logs for suspicious activities and threats  |
+| `Get-NetworkDiagnostics.ps1` | Comprehensive network diagnostics and troubleshooting         |
+
+### Security & Administration
+
+| Script                     | Description                                                           |
+| -------------------------- | --------------------------------------------------------------------- |
+| `Set-WindowsHardening.ps1` | Security hardening based on best practices (UAC, Firewall, Defender)  |
+| `Set-FirewallRules.ps1`    | Interactive Windows Firewall management with rule creation/management |
+| `Manage-LocalUsers.ps1`    | Comprehensive local user and group management                         |
+
+#### Windows Hardening Features:
+
+-   Windows Firewall configuration (all profiles)
+-   Windows Defender configuration
+-   SMBv1 protocol disabling
+-   UAC (User Account Control) configuration
+-   PowerShell v2 disabling
+-   Automatic updates enabling
+-   Password policy enforcement
+-   Audit policy configuration
+-   Guest account disabling
+-   RDP security configuration
+-   AutoRun disabling
+-   Event log size configuration
+-   Unnecessary service disabling
+
+### System Maintenance & Optimization
+
+| Script                | Description                                                            |
+| --------------------- | ---------------------------------------------------------------------- |
+| `Backup-System.ps1`   | Comprehensive system backup (registry, tasks, logs, configurations)    |
+| `Optimize-System.ps1` | System optimization and cleanup (temp files, cache, disk optimization) |
+| `Backup-Database.ps1` | Multi-database backup (SQL Server, MySQL, PostgreSQL, MongoDB)         |
+
+#### Backup Features:
+
+-   System information backup
+-   Installed programs list
+-   Windows features
+-   Scheduled tasks
+-   Network configuration
+-   Registry keys (selective)
+-   Event logs (Application, System, Security)
+-   User profile listings
+-   Compression and retention management
+
+#### Database Support:
+
+-   SQL Server (native backup)
+-   MySQL (mysqldump)
+-   PostgreSQL (pg_dump)
+-   MongoDB (mongodump)
+-   Automated compression
+-   Retention policy management
 
 ## 🔧 Installation
 
@@ -134,54 +229,101 @@ git clone https://github.com/mgnischor/automation-scripts.git
 cd automation-scripts
 ```
 
-2. Make scripts executable (Linux):
+2. For Linux - Make scripts executable:
 
 ```bash
 chmod +x src/linux/*.sh
 ```
 
-3. Run a script:
+3. Run a Linux script:
 
 ```bash
 sudo ./src/linux/system_health_check.sh
+```
+
+4. For Windows - Run PowerShell as Administrator and execute:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\src\windows\Test-SystemHealth.ps1
 ```
 
 ## 📖 Usage Examples
 
-### System Health Check
+### Linux Examples
+
+#### System Health Check
 
 ```bash
 sudo ./src/linux/system_health_check.sh
 ```
 
-### Security Hardening (Debian/Ubuntu)
+#### Security Hardening (Debian/Ubuntu)
 
 ```bash
 sudo ./src/linux/debian_hardening.sh
 ```
 
-### Database Backup (All Databases)
+#### Database Backup (All Databases)
 
 ```bash
 sudo ./src/linux/database_backup.sh all
 ```
 
-### MySQL Maintenance
+#### MySQL Maintenance
 
 ```bash
 sudo ./src/linux/mysql_maintenance.sh
 ```
 
-### Interactive User Management
+#### Interactive User Management
 
 ```bash
 sudo ./src/linux/manage_users.sh
 ```
 
-### Monitor Disk Space
+#### Monitor Disk Space
 
 ```bash
 sudo ./src/linux/monitor_disk_space.sh
+```
+
+### Windows Examples
+
+#### System Health Check
+
+```powershell
+.\src\windows\Test-SystemHealth.ps1
+```
+
+#### Windows Security Hardening
+
+```powershell
+.\src\windows\Set-WindowsHardening.ps1
+```
+
+#### Database Backup
+
+```powershell
+.\src\windows\Backup-Database.ps1
+```
+
+#### Service Monitoring
+
+```powershell
+.\src\windows\Watch-ServiceMonitor.ps1
+```
+
+#### User Management
+
+```powershell
+.\src\windows\Manage-LocalUsers.ps1
+```
+
+#### Network Diagnostics
+
+```powershell
+.\src\windows\Get-NetworkDiagnostics.ps1
 ```
 
 ## ⚙️ Configuration
@@ -256,11 +398,13 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 -   [x] Database backup and maintenance
 -   [x] Security hardening automation
 -   [x] System monitoring and health checks
--   [ ] Windows PowerShell scripts
+-   [x] Windows PowerShell scripts
+-   [ ] Advanced database maintenance for Windows (Oracle, Redis, Cassandra)
 -   [ ] Kubernetes/Docker orchestration scripts
 -   [ ] Cloud provider integration (AWS, Azure, GCP)
 -   [ ] Ansible playbook alternatives
 -   [ ] Web-based dashboard for monitoring
+-   [ ] Automated testing and CI/CD integration
 
 ## 🐛 Bug Reports & Feature Requests
 
